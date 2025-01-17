@@ -60,7 +60,7 @@ public class Scores : MonoBehaviour
     {
         SaveData data = new SaveData();
 
-        if (keyValuePairs != null)
+       /* if (keyValuePairs != null)
         {
             Debug.Log("3.5");
             keyValuePairs.Clear();
@@ -82,31 +82,37 @@ public class Scores : MonoBehaviour
                 Debug.Log("names = " + names[i]);
                 keyValuePairs.Add(names[i], scores[i]);
             }
-        }
+        }*/
 
         data.currentname = currentname;
 
-        data.name1 = names[1];
-        data.name2 = names[2];
-        data.name3 = names[3];
-        data.name4 = names[4];
-        data.name5 = names[5];
-        data.name6 = names[6];
-        data.name7 = names[7];
-        data.name8 = names[8];
-        data.name9 = names[9];
-        data.name10 = names[10];
+        for (int i = 0; i < 10; i++)
+        {
+            names.Add("-");
+            scores.Add(0);
+        }
+        
+        data.name1 = names[0];
+        data.name2 = names[1];
+        data.name3 = names[2];
+        data.name4 = names[3];
+        data.name5 = names[4];
+        data.name6 = names[5];
+        data.name7 = names[6];
+        data.name8 = names[7];
+        data.name9 = names[8];
+        data.name10 = names[9];
 
-        data.score1 = scores[1];
-        data.score2 = scores[2];
-        data.score3 = scores[3];
-        data.score4 = scores[4];
-        data.score5 = scores[5];
-        data.score6 = scores[6];
-        data.score7 = scores[7];
-        data.score8 = scores[8];
-        data.score9 = scores[9];
-        data.score10 = scores[10];
+        data.score1 = scores[0];
+        data.score2 = scores[1];
+        data.score3 = scores[2];
+        data.score4 = scores[3];
+        data.score5 = scores[4];
+        data.score6 = scores[5];
+        data.score7 = scores[6];
+        data.score8 = scores[7];
+        data.score9 = scores[8];
+        data.score10 = scores[9];
 
         foreach (KeyValuePair<string, int> bit in keyValuePairs)
         {
@@ -130,20 +136,43 @@ public class Scores : MonoBehaviour
                 keyValuePairs = new Dictionary<string, int>();
             }
             Debug.Log("1");
+
+            names.Clear();
+            scores.Clear();
+            /*for (int i = 0; i< 10; i++)
+            {
+                names.Add("-");
+                scores.Add(0);
+            }*/
+
             currentname = data.currentname;
 
-            keyValuePairs.Add(data.name1, data.score1);
-            keyValuePairs.Add(data.name2, data.score2);
-            keyValuePairs.Add(data.name3, data.score3);
-            keyValuePairs.Add(data.name4, data.score4);
-            keyValuePairs.Add(data.name5, data.score5);
-            keyValuePairs.Add(data.name6, data.score6);
-            keyValuePairs.Add(data.name7, data.score7);
-            keyValuePairs.Add(data.name8, data.score8);
-            keyValuePairs.Add(data.name9, data.score9);
-            keyValuePairs.Add(data.name10, data.score10);
+            if (data.name1 != null)
+            {
+                names.Add(data.name1);
+                names.Add(data.name2);
+                names.Add(data.name3);
+                names.Add(data.name4);
+                names.Add(data.name5);
+                names.Add(data.name6);
+                names.Add(data.name7);
+                names.Add(data.name8);
+                names.Add(data.name9);
+                names.Add(data.name10);
 
-            if (keyValuePairs != null)
+                scores.Add(data.score1);
+                scores.Add(data.score2);
+                scores.Add(data.score3);
+                scores.Add(data.score4);
+                scores.Add(data.score5);
+                scores.Add(data.score6);
+                scores.Add(data.score7);
+                scores.Add(data.score8);
+                scores.Add(data.score9);
+                scores.Add(data.score10);
+            }
+
+            /*if (keyValuePairs != null)
             {
                 Debug.Log("2");
                 int num = 10;
@@ -151,8 +180,7 @@ public class Scores : MonoBehaviour
                 {
                     num = keyValuePairs.Count;
                 }
-                names.Clear();
-                scores.Clear();
+
                 foreach (KeyValuePair<string, int> item in keyValuePairs.OrderBy(key => key.Value).Take(num))
                 {
                     names.Add(item.Key);
@@ -166,7 +194,7 @@ public class Scores : MonoBehaviour
                     keyValuePairs.Add(names[i], scores[i]);
                 }
                 Debug.Log("3 = "+ names + " + " + keyValuePairs);
-            }
+            }*/
         }
     }
 }

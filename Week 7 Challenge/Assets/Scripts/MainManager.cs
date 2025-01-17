@@ -112,6 +112,7 @@ public class MainManager : MonoBehaviour
                         Scores.Instance.scores[i] = m_Points;
                     }
                     done = true;
+                    break;
                 }
             }
 
@@ -124,6 +125,7 @@ public class MainManager : MonoBehaviour
                         Scores.Instance.scores.Insert(i, m_Points);
                         Scores.Instance.names.Insert(i, Scores.Instance.currentname);
                         done = true;
+                        break;
                     }
                 }
             }
