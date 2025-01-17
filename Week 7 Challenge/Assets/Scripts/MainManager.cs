@@ -10,6 +10,7 @@ public class MainManager : MonoBehaviour
     public int LineCount = 6;
     public Rigidbody Ball;
 
+    public Text HighScoreText;
     public Text ScoreText;
     public GameObject GameOverText;
     
@@ -18,10 +19,19 @@ public class MainManager : MonoBehaviour
     
     private bool m_GameOver = false;
 
-    
+    private List<string> names;
+    private List<int> scores;
+
     // Start is called before the first frame update
     void Start()
     {
+        Scores.Instance.LoadFile();
+
+        if (Scores.Instance.names.Count > 0)
+        {
+            HighScoreText.text = "Best Score: " + Scores.Instance.names[0] + ": " + Scores.Instance.scores[0];
+        }
+
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
         
@@ -72,5 +82,58 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        DoScores();
+    }
+
+    void DoScores()
+    {
+        if (Scores.Instance.scores.Count == 0)
+        {
+            HighScoreText.text = "Best Score: " + Scores.Instance.currentname + ": " + m_Points;
+            Scores.Instance.scores.Add(m_Points);
+            Scores.Instance.names.Add(Scores.Instance.currentname);
+        }
+        else
+        {
+            if (m_Points > Scores.Instance.scores[0])
+            {
+                HighScoreText.text = "Best Score: " + Scores.Instance.currentname + ": " + m_Points;
+            }
+
+            int scoresnum = Scores.Instance.scores.Count;
+            bool done = false;
+
+            for (int i = 0; i < scoresnum; i++)
+            {
+                if (Scores.Instance.names[i] == Scores.Instance.currentname)
+                {
+                    if (m_Points > Scores.Instance.scores[i])
+                    {
+                        Scores.Instance.scores[i] = m_Points;
+                    }
+                    done = true;
+                }
+            }
+
+            if (!done)
+            {
+                for (int i = 0; i < scoresnum; i++)
+                {
+                    if (m_Points > Scores.Instance.scores[i])
+                    {
+                        Scores.Instance.scores.Insert(i, m_Points);
+                        Scores.Instance.names.Insert(i, Scores.Instance.currentname);
+                        done = true;
+                    }
+                }
+            }
+
+            if (!done)
+            {
+                Scores.Instance.scores.Add(m_Points);
+                Scores.Instance.names.Add(Scores.Instance.currentname);
+            }
+        }
+        Scores.Instance.SaveFile();
     }
 }
